@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melodox - Garantía de Productos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <div class="tamano">
+          <img src="material/logo.png" alt="Melodox Logo" style="height: 55px;">
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="instrumentos.html">Instrumentos</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="blog.html">Blog</a>
+        <button class="btn" id="authBtn">Login</button>
+        <div class="cart-icon" id="cartIcon">Cart <span class="cart-count" id="cartCount">0</span></div>
+      </div>
+    </nav>
+  </header>
+
+   <!-- MODAL DE LOGIN -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">×</span>
+      <div class="tabs">
+        <div class="tab active" data-tab="login">Login</div>
+        <div class="tab" data-tab="register">Registro</div>
+      </div>
+      <div id="loginForm" style="display: block;">
+        <input type="text" id="username" placeholder="Email o usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button class="modal-btn" id="loginSubmit">Ingresar</button>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <input type="text" id="regUsername" placeholder="Nombre completo" required />
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Contraseña" required />
+        <button class="modal-btn" id="registerSubmit">Registrarse</button>
+      </div>
+      <p id="authError" ></p>
+      <p id="authSuccess" ></p>
+    </div>
+  </div>
+  <!-- CARRITO LATERAL  -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Mi Carrito</h3>
+      <span id="closeCart">X</span>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total">Total: S/ <span id="cartTotal">0</span></div>
+    <button class="checkout-btn">Pagar Ahora</button>
+  </div>
+
+  <!-- BANNER GARANTÍA -->
+  <section class="nosotros-banner">
+    <h1>Garantía de Productos</h1>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="nosotros-main">
+    <div class="container">
+      <div class="nosotros-grid">
+
+        <!-- COLUMNA TABLA -->
+        <div class="nosotros-text">
+          <!-- TÍTULO Y DESCRIPCIÓN -->
+          <h2 style="color: black;">Política de Garantía</h2>
+          <p style="color: #333; line-height: 1.7;">
+            En <strong>Melodox</strong>, garantizamos la calidad de todos nuestros productos. A continuación, detallamos la cobertura por categoría:
+          </p>
+
+          <!-- TABLA DE GARANTÍA  -->
+          <div class="garantia-table-container">
+            <table class="garantia-table">
+              <thead>
+                <tr>
+                  <!-- Header azul oscuro -->
+                  <th style="background: #1a3d6e; color: white;">TIPO DE PRODUCTO</th>
+                  <th style="background: #1a3d6e; color: white;">DURACIÓN</th>
+                  <th style="background: #1a3d6e; color: white;">CONDICIONES</th>
+                  <th style="background: #1a3d6e; color: white;">EXCEPCIONES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <!-- Fila celeste claro -->
+                  <td style="background: #e6f2ff; color: #1a3d6e; font-weight: 600;">Instrumentos de Cuerda</td>
+                  <td style="background: #e6f2ff; color: #333;">12 meses</td>
+                  <td style="background: #e6f2ff; color: #333;">Defectos de fabricación.</td>
+                  <td style="background: #e6f2ff; color: #333;">Mal uso o humedad.</td>
+                </tr>
+                <tr>
+                  <td style="background: #f8fbff; color: #1a3d6e; font-weight: 600;">Instrumentos Electrónicos</td>
+                  <td style="background: #f8fbff; color: #333;">12 meses</td>
+                  <td style="background: #f8fbff; color: #333;">Fallas en componentes internos.</td>
+                  <td style="background: #f8fbff; color: #333;">Manipulación no autorizada.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- CONDICIONES GENERALES -->
+          <h3 style="margin-top: 2rem; color: #1a3d6e;">Condiciones Generales</h3>
+          <ul class="garantia-list">
+            <li>La garantía inicia desde la fecha de compra.</li>
+            <li>Debes presentar la <strong>boleta o factura</strong> original.</li>
+            <li>El producto debe estar en su empaque original con todos los accesorios.</li>
+            <li>Reparación o reemplazo gratuito dentro del plazo.</li>
+            <li>No cubre desgaste normal ni daños por uso indebido.</li>
+          </ul>
+
+          <!-- CÓMO HACER VALER LA GARANTÍA -->
+          <h3 style="color: #1a3d6e;">¿Cómo hacer valer tu garantía?</h3>
+          <p style="color: #333;">
+            Acércate a cualquiera de nuestras tiendas o escríbenos a <strong>ventas@melodox.pe</strong> con tu ticket de compra y descripción del problema.
+          </p>
+
+          <p style="margin-top: 2rem; font-style: italic; color: #555;">
+            <em>Tu confianza es nuestra prioridad. ¡Garantizamos tu satisfacción!</em>
+          </p>
+        </div>
+
+        <!-- COLUMNA IMAGEN  -->
+        <div class="nosotros-img">
+          <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Garantía de calidad" style="border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+  <div class="footer-container">
+    <!-- Nuestras Tiendas -->
+    <div class="footer-column">
+      <h4> Nuestras Tiendas</h4>
+      <p>Calle Alcanfores 199 Tiendas 101, 102 y 104</p>
+      <p>Lun a Sab 10am - 7:30pm / Dom 11am - 6pm</p>
+      <p><strong>ventas@marin.pe</strong></p>
+      <p><strong>+51 940 027 128</strong></p>
+    </div>
+
+    <!-- Condiciones y Garantía -->
+    <div class="footer-column">
+      <h4> Condiciones y Garantía</h4>
+      <ul>
+        <li><a href="#">Términos y Condiciones</a></li>
+        <li><a href="politica_de_privacidad.html">Política de Privacidad</a></li>
+        <li><a href="garantia_producto.html">Garantía de Productos</a></li>
+        <li><a href="libro_reclamos.html">Libro de Reclamaciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Nuestra Historia -->
+    <div class="footer-column">
+      <h4> Nuestra Historia</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="galeria_video.html">Galería de Videos</a></li>
+      </ul>
+    </div>
+
+    <!-- Servicios -->
+    <div class="footer-column">
+      <h4>🚚 Servicios</h4>
+      <ul>
+        <li><a href="#">Envíos de Productos</a></li>
+        <li><a href="#">Métodos de Pago</a></li>
+         <!-- MÉTODOS DE PAGO -->
+        <div class="payment-methods-footer">
+          <img src="material/ico/yape.png" alt="Yape">
+          <img src="material/ico/plin.jpg" alt="Plin">
+          <img src="material/ico/bcp.jpg" alt="BCP">
+          <img src="material/ico/bbva.png" alt="BBVA">
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Melodox. Todos los derechos reservados. Perú 🇵🇪</p>
+  </div>
+</footer>
+
+  <div class="sound-toggle" id="soundToggle">Muted</div>
+  <script src="script.js"></script>
+</body>
+</html>

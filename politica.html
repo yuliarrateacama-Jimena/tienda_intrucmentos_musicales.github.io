@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Devoluciones - Melodix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Botón Regresar */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: #1e3c72;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: #1e3c72;
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(30,60,114,0.3);
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(48, 188, 97, 0.95), rgba(42, 152, 93, 0.9)),
+                        url('material/contacto-bg.jpg') center/cover;
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '📦';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenedor Principal */
+        .contenedor {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .subtitulo {
+            font-size: 32px;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .texto {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .subsub {
+            font-size: 24px;
+            color: #2a5298;
+            margin: 30px 0 20px;
+        }
+
+        /* Tabla Mejorada */
+        .tabla {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+
+        .tabla th {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .tabla td {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabla tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tabla tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .badge-7 {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badge-5 {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .badge-3 {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        /* Iframe */
+        .iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            animation: modalSlideIn 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-content h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .modal-content p {
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .modal-content button {
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-content button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Cards Info */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .info-card h4 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .info-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .contenedor {
+                padding: 30px 20px;
+            }
+
+            .subtitulo {
+                font-size: 24px;
+            }
+
+            .back-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOTÓN REGRESAR -->
+    <a href="index.html" class="back-button">Regresar al Inicio</a>
+
+    <!-- MODAL DE AVISO -->
+    <div id="modalAviso" class="modal show">
+        <div class="modal-content">
+            <h2> Política de Devoluciones</h2>
+            <p>Antes de continuar, revisa nuestras condiciones para devoluciones y reembolsos.</p>
+            <button id="cerrarModal">Entendido</button>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Política de Devoluciones</h1>
+            <p>Revisa nuestros términos y condiciones para devoluciones, cambios y reembolsos</p>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor">
+
+        <h2 class="subtitulo"> Condiciones Generales de Devolución</h2>
+
+        <p class="texto">
+            En Melodix, buscamos que todos nuestros clientes estén satisfechos con su compra.
+            Si por alguna razón deseas solicitar una devolución, reemplazo o un reembolso, revisa las siguientes condiciones.
+        </p>
+
+        <!-- Cards Informativos -->
+        <div class="info-grid">
+           <!-- <div class="info-card">
+                <div class="icon">   </div>
+                <h4>Garantía de Calidad</h4>
+                <p>Todos nuestros productos están respaldados por garantía oficial</p>
+            </div>-->
+            <div class="info-card">
+                <div class="icon">🚚</div>
+                <h4>Envío Seguro</h4>
+                <p>Empaque especial para proteger tu instrumento</p>
+            </div>
+            <div class="info-card">
+                <div class="icon">💳</div>
+                <h4>Reembolso Rápido</h4>
+                <p>Procesamos devoluciones en 5-7 días hábiles</p>
+            </div>
+        </div>
+
+        <h3 class="subsub">🔄 Tipos de Devolución</h3>
+        
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Plazo</th>
+                    <th>Condiciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Producto Defectuoso</strong></td>
+                    <td><span class="badge badge-7">7 días</span></td>
+                    <td>Debe presentar falla comprobable.</td>
+                </tr>
+                <tr>
+                    <td><strong>Error en el Pedido</strong></td>
+                    <td><span class="badge badge-5">5 días</span></td>
+                    <td>Producto sin uso y en empaque original.</td>
+                </tr>
+                <tr>
+                    <td><strong>Desistimiento</strong></td>
+                    <td><span class="badge badge-3">3 días</span></td>
+                    <td>No aplica para productos de audio profesional.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="subsub">📍 Punto de Atención</h3>
+        <p class="texto">Visita nuestra tienda física para realizar devoluciones presenciales:</p>
+        
+        <iframe 
+            class="iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.339617419444!2d-77.03274972394986!3d-12.121348388078198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8c9c2b8b8e7%3A0x2d5d445fdbf373e9!2sCalle%20Alcanfores%20199%2C%20Miraflores%2015074%2C%20Per%C3%BA!5e0!3m2!1ses!2spe!4v1695240000000!5m2!1ses!2spe"
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+
+    </main>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("modalAviso");
+            const cerrar = document.getElementById("cerrarModal");
+
+            // Mostrar modal al cargar
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 500);
+
+            // Cerrar modal
+            cerrar.addEventListener("click", () => {
+                modal.classList.remove('show');
+            });
+        });
+    </script>
+
+</body>
+</html>

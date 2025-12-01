@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melodox - Libro de Reclamos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <div class="tamano">
+          <img src="material/logo.png" alt="Melodox Logo" style="height: 55px;">
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="instrumentos.html">Instrumentos</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="blog.html">Blog</a>
+        <button class="btn" id="authBtn">Login</button>
+        <div class="cart-icon" id="cartIcon">Cart <span class="cart-count" id="cartCount">0</span></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MODAL DE LOGIN -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">×</span>
+      <div class="tabs">
+        <div class="tab active" data-tab="login">Login</div>
+        <div class="tab" data-tab="register">Registro</div>
+      </div>
+      <div id="loginForm" style="display: block;">
+        <input type="text" id="username" placeholder="Email o usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button class="modal-btn" id="loginSubmit">Ingresar</button>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <input type="text" id="regUsername" placeholder="Nombre completo" required />
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Contraseña" required />
+        <button class="modal-btn" id="registerSubmit">Registrarse</button>
+      </div>
+      <p id="authError" ></p>
+      <p id="authSuccess" ></p>
+    </div>
+  </div>
+  <!-- CARRITO LATERAL -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Mi Carrito</h3>
+      <span id="closeCart">X</span>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total">Total: S/ <span id="cartTotal">0</span></div>
+    <button class="checkout-btn">Pagar Ahora</button>
+  </div>
+
+  <!-- BANNER LIBRO DE RECLAMOS -->
+  <section class="nosotros-banner">
+    <h1>Libro de Reclamos</h1>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="nosotros-main">
+    <div class="container">
+      <div class="nosotros-grid">
+
+        <!-- COLUMNA FORMULARIO -->
+        <div class="nosotros-text">
+          <h2 style="color: black;">Registrar Reclamo</h2>
+          <p class="form-subtitle">Completa el formulario para que podamos atenderte</p>
+
+          <form id="reclamoForm" class="reclamo-form">
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre y Apellido</label>
+              <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre completo" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="correo">Correo Electrónico</label>
+              <input type="email" id="correo" name="correo" class="form-input" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="999-999-999">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="categoria">Categoría</label>
+              <select id="categoria" name="categoria" class="form-input" required>
+                <option value="">-- Selecciona --</option>
+                <option value="producto">Producto</option>
+                <option value="servicio">Servicio</option>
+                <option value="pago">Pago</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="mensaje">Detalle del Reclamo</label>
+              <textarea id="mensaje" name="mensaje" class="form-input" rows="5" placeholder="Describe tu reclamo..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-button">Enviar Reclamo</button>
+            <button type="reset" class="form-button" style="background: #ccc; color:#333;">Limpiar</button>
+          </form>
+
+          <p class="form-subtitle" style="text-align:center; margin-top:1rem;">* Todos los campos son obligatorios.</p>
+        </div>
+
+        <!-- COLUMNA IMAGEN (opcional) -->
+        <div class="nosotros-img">
+          <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Soporte al cliente" style="border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+ 
+  <footer>
+  <div class="footer-container">
+    <!-- Nuestras Tiendas -->
+    <div class="footer-column">
+      <h4> Nuestras Tiendas</h4>
+      <p>Calle Alcanfores 199 Tiendas 101, 102 y 104</p>
+      <p>Lun a Sab 10am - 7:30pm / Dom 11am - 6pm</p>
+      <p><strong>ventas@marin.pe</strong></p>
+      <p><strong>+51 940 027 128</strong></p>
+    </div>
+
+    <!-- Condiciones y Garantía -->
+    <div class="footer-column">
+      <h4> Condiciones y Garantía</h4>
+      <ul>
+        <li><a href="cokis.html">Términos de cokis</a></li>
+        <li><a href="politica_de_privacidad.html">Política de Privacidad</a></li>
+        <li><a href="politica.html">politica de devoluciones</a></li>
+        <li><a href="libro_reclamos.html">Libro de Reclamaciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Nuestra Historia -->
+    <div class="footer-column">
+      <h4> Nuestra Historia</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="galeria_video.html">Galería de Videos</a></li>
+      </ul>
+    </div>
+
+    <!-- Servicios -->
+    <div class="footer-column">
+      <h4> Servicios</h4>
+      <ul>
+        <li><a href="garantia_producto.html">garantia de Productos</a></li>
+        <li><a href="#">Métodos de Pago</a></li>
+         <!-- MÉTODOS DE PAGO -->
+        <div class="payment-methods-footer">
+          <img src="material/ico/yape.png" alt="Yape">
+          <img src="material/ico/plin.jpg" alt="Plin">
+          <img src="material/ico/bcp.jpg" alt="BCP">
+          <img src="material/ico/bbva.png" alt="BBVA">
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Melodox. Todos los derechos reservados. Perú 🇵🇪</p>
+  </div>
+</footer>
+
+  <div class="sound-toggle" id="soundToggle">Muted</div>
+
+  <!-- SCRIPT PARA ANIMACIÓN DE BOTÓN -->
+  <script>
+    const form = document.getElementById("reclamoForm");
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const btn = form.querySelector(".form-button");
+      btn.classList.add("loading");
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.classList.remove("loading");
+        btn.disabled = false;
+        alert("Tu reclamo ha sido enviado con éxito. ¡Gracias por ayudarnos a mejorar!");
+        form.reset();
+      }, 1500);
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

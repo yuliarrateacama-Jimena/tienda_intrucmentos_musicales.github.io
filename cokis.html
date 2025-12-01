@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Políticas de Cookies - Melodix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Botón Regresar */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: #1e3c72;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: #1e3c72;
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(30,60,114,0.3);
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(51, 199, 83, 0.95), rgba(10, 185, 150, 0.9)),
+                        url('material/cookies-bg.jpg') center/cover;
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🍪';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenedor Principal */
+        .contenedor {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Cards de Información */
+        .info-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+        }
+
+        .subtitulo {
+            font-size: 32px;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .texto {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .subsub {
+            font-size: 24px;
+            color: #2a5298;
+            margin: 30px 0 20px;
+        }
+
+        /* Tabla Mejorada */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+
+        .tabla {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .tabla th {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .tabla td {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabla tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tabla tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Badges de Tipo */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-sesion {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-año {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .badge-meses {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        /* Formulario Mejorado */
+        .formulario {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+
+        .group {
+            margin-bottom: 25px;
+        }
+
+        .group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .group input,
+        .group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .group input:focus,
+        .group textarea:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42,82,152,0.1);
+            outline: none;
+        }
+
+        .btn-form {
+            width: 100%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-form:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(30,60,114,0.3);
+        }
+
+        /* Modal de Cookies */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            animation: modalSlideIn 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-content h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .modal-content p {
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .modal-content button {
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-content button:hover {
+            transform: scale(1.05);
+        }
+
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .subtitulo {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <a href="index.html" class="back-button">Regresar al Inicio</a>
+    <!-- MODAL DE COOKIES -->
+    <div id="modalCookies" class="modal show">
+        <div class="modal-content">
+            <h2>Uso de Cookies</h2>
+            <p>Este sitio utiliza cookies para mejorar tu experiencia de navegación y personalizar el contenido.</p>
+            <button id="cerrarCookies">Aceptar y Continuar</button>
+        </div>
+    </div>
+ 
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Políticas de Cookies</h1>
+            <p>Tu privacidad es importante. Conoce cómo gestionamos tus datos</p>
+        </div>
+    </section>
+
+    <!-- CONTENIDO -->
+    <main class="contenedor">
+
+        <div class="info-card">
+            <h2 class="subtitulo"> ¿Qué son las Cookies?</h2>
+            <p class="texto">
+                Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo 
+                cuando los visitas. Nos ayudan a recordar tus preferencias, mejorar tu experiencia de navegación 
+                y entender cómo interactúas con nuestro sitio para ofrecerte un mejor servicio.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3 class="subsub"> Tipos de Cookies que Utilizamos</h3>
+
+            <div class="table-responsive">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Cookie</th>
+                            <th>Propósito</th>
+                            <th>Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cookies Técnicas</strong></td>
+                            <td>Permiten el funcionamiento básico del sitio web y la navegación por sus páginas.</td>
+                            <td><span class="badge badge-sesion">Sesión</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cookies de Personalización</strong></td>
+                            <td>Recuerdan tus preferencias como idioma, región y configuración de visualización.</td>
+                            <td><span class="badge badge-año">1 año</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cookies Analíticas</strong></td>
+                            <td>Analizan el tráfico, comportamiento del usuario y rendimiento del sitio.</td>
+                            <td><span class="badge badge-meses">6 meses</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3 class="subsub"> Solicitar Eliminación de Datos</h3>
+            <p class="texto" style="margin-bottom: 30px;">
+                Si deseas que eliminemos tus datos personales o cookies almacenadas, 
+                completa el siguiente formulario y procesaremos tu solicitud en un plazo máximo de 7 días hábiles.
+            </p>
+
+            <form class="formulario">
+                <div class="group">
+                    <label>Nombre completo:</label>
+                    <input type="text" placeholder="Ej: Juan Pérez García" required>
+                </div>
+
+                <div class="group">
+                    <label>Correo electrónico:</label>
+                    <input type="email" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="group">
+                    <label>Motivo de solicitud:</label>
+                    <textarea rows="5" placeholder="Describe brevemente tu solicitud..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-form">Enviar Solicitud</button>
+            </form>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("modalCookies");
+            const btn = document.getElementById("cerrarCookies");
+
+            // Mostrar modal al cargar
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 500);
+
+            // Cerrar modal
+            btn.addEventListener("click", () => {
+                modal.classList.remove('show');
+            });
+
+            // Animación del formulario
+            const form = document.querySelector('.formulario');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Solicitud enviada correctamente. Te contactaremos pronto.');
+                form.reset();
+            });
+        });
+    </script>
+
+</body>
+</html>

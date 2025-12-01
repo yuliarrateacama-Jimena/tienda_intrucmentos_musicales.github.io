@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melodox - Instrumentos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600&display:display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="tamano">
+                <img src="material/logo.png" alt="Melodix Logo">
+            </div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="instrumentos.html" class="active">Instrumentos</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="blog.html">Blog</a>
+        <button class="btn" id="authBtn">Login</button>
+        <div class="cart-icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></div>
+      </div>
+    </nav>
+  </header>
+   <!-- MODAL DE LOGIN -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">×</span>
+      <div class="tabs">
+        <div class="tab active" data-tab="login">Login</div>
+        <div class="tab" data-tab="register">Registro</div>
+      </div>
+      <div id="loginForm" style="display: block;">
+        <input type="text" id="username" placeholder="Email o usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button class="modal-btn" id="loginSubmit">Ingresar</button>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <input type="text" id="regUsername" placeholder="Nombre completo" required />
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Contraseña" required />
+        <button class="modal-btn" id="registerSubmit">Registrarse</button>
+      </div>
+      <p id="authError" ></p>
+      <p id="authSuccess" ></p>
+    </div>
+  </div>
+  <!-- === CARRITO LATERAL === 
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Mi Carrito</h3>
+      <span id="closeCart">×</span>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total">Total: S/ <span id="cartTotal">0</span></div>
+    <button class="checkout-btn">Pagar Ahora</button>
+  </div>-->
+  <!-- CARRITO LATERAL -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Mi Carrito</h3>
+    <span id="closeCart">×</span>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <!-- Ejemplo dinámico -->
+    <div class="cart-item">
+      <img src="material/blog/guitarra_b.jpg" alt="Piano P-45">
+      <div class="item-info">
+        <p>Piano P-45</p>
+        <p class="price">S/ 2100</p>
+      </div>
+      <button class="remove-item">×</button>
+    </div>
+    <!--fin de ejemplo de carrito-->
+  </div>
+  <div class="cart-total">Total: S/ <span id="cartTotal">2100</span></div>
+  <button class="checkout-btn" onclick="goToCheckout()">Pagar Ahora</button>
+</div>
+
+  <main class="instrumentos-container">
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <h3>🔍 Buscar</h3>
+      <input type="text" id="searchInput" placeholder="Nombre del producto..." onkeyup="filterProducts()">
+      
+      <h3> Categoría</h3>
+      <select id="categoryFilter" onchange="filterProducts()">
+        <option value="">Todas</option>
+        <option value="guitarra">Guitarras</option>
+        <option value="teclado">Teclados</option>
+        <option value="bateria">Baterías</option>
+        <option value="microfono">Micrófonos</option>
+        <option value="accesorio">Accesorios</option>
+      </select>
+
+      <h3>Precio Máximo</h3>
+      <input type="range" id="priceFilter" min="0" max="10000" value="10000" oninput="document.getElementById('priceValue').textContent = 'S/ ' + this.value; filterProducts()">
+      <p style="color:var(--green); text-align:center;" id="priceValue">S/ 10000</p>
+
+      <button class="filter-btn" onclick="filterProducts()">Aplicar Filtros</button>
+    </aside>
+
+    <!-- Productos -->
+    <section>
+      <h2>Nuestros Instrumentos</h2>
+      <div class="product-grid">
+        <!-- 20+ Productos -->
+        <div class="product-card" data-name="Fender Stratocaster" data-category="guitarra" data-price="3999">
+          <div class="product-img"><img class="product-img" src="material/guitarra.webp" alt="Guitarra Eléctrica"></div>
+          <div class="product-info">
+            <h3>Fender Stratocaster</h3>
+            <div class="price">S/ 3,999</div>
+            <button class="add-to-cart" onclick="addToCart('Fender Stratocaster', 3999, '🎸')">Añadir</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Gibson Les Paul" data-category="guitarra" data-price="5499">
+          <div class="product-image"><img class="product-image" src="material/guitarra-electrica.jpg" alt="Guitarra Eléctrica"></div>
+          <div class="product-info">
+            <h3>Gibson Les Paul</h3>
+            <div class="price">S/ 5,499</div>
+            <button class="add-to-cart" onclick="addToCart('Gibson Les Paul', 5499, '🎸')">Añadir</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Yamaha PSR-E373" data-category="teclado" data-price="1299">
+          <div class="product"><img class="product-image" src="material/piano3.jpeg" alt="Guitarra Eléctrica"></div>
+          <div class="product-info">
+            <h3>Yamaha PSR-E373</h3>
+            <div class="price">S/ 1,299</div>
+            <button class="add-to-cart" onclick="addToCart('Yamaha PSR-E373', 1299, '🎹')">Añadir</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Roland FP-30X" data-category="teclado" data-price="3299">
+          <div class="product"><img class="product-image" src="material/piano.jpg" alt="Guitarra Eléctrica"></div>
+          <div class="product-info">
+            <h3>Roland FP-30X</h3>
+            <div class="price">S/ 3,299</div>
+            <button class="add-to-cart" onclick="addToCart('Roland FP-30X', 3299, '🎹')">Añadir</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Pearl Export 5pcs" data-category="bateria" data-price="4599">
+          <div class="product"><img class="product-image" src="material/trompeta.jpg" alt="Guitarra Eléctrica"></div>
+          <div class="product-info">
+            <h3>Pearl Export 5pcs</h3>
+            <div class="price">S/ 4,599</div>
+            <button class="add-to-cart" onclick="addToCart('Pearl Export 5pcs', 4599, '🥁')">Añadir</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Shure SM7B" data-category="microfono" data-price="1899">
+          <div class="product-img"><img img class="product-image" src="material/microfono.jpg" alt="microfono"></div>
+          <div class="product-info">
+            <h3>Shure SM7B</h3>
+            <div class="price">S/ 1,899</div>
+            <button class="add-to-cart" onclick="addToCart('Shure SM7B', 1899, '🎤')">Añadir</button>
+          </div>
+        </div>
+        <!-- Más productos... (puedes copiar y pegar) -->
+        <div class="product-card" data-name="Cable XLR 5m" data-category="accesorio" data-price="89">
+          <div class="product" ><img class="product-image"  src="./material/asesorio_gui.jpg" alt=""></div>
+          <div class="product-info">
+            <h3>Cable XLR 5m</h3>
+            <div class="price">S/ 89</div>
+            <button class="add-to-cart" onclick="addToCart('Cable XLR 5m', 89, '🔌')">Añadir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+ 
+  <footer>
+  <div class="footer-container">
+    <!-- Nuestras Tiendas -->
+    <div class="footer-column">
+      <h4> Nuestras Tiendas</h4>
+      <p>Calle Alcanfores 199 Tiendas 101, 102 y 104</p>
+      <p>Lun a Sab 10am - 7:30pm / Dom 11am - 6pm</p>
+      <p><strong>ventas@marin.pe</strong></p>
+      <p><strong>+51 940 027 128</strong></p>
+    </div>
+
+    <!-- Condiciones y Garantía -->
+    <div class="footer-column">
+      <h4> Condiciones y Garantía</h4>
+      <ul>
+        <li><a href="cokis.html">Términos de cokis</a></li>
+        <li><a href="politica_de_privacidad.html">Política de Privacidad</a></li>
+        <li><a href="politica.html">politica de devoluciones</a></li>
+        <li><a href="libro_reclamos.html">Libro de Reclamaciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Nuestra Historia -->
+    <div class="footer-column">
+      <h4> Nuestra Historia</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="galeria_video.html">Galería de Videos</a></li>
+      </ul>
+    </div>
+
+    <!-- Servicios -->
+    <div class="footer-column">
+      <h4> Servicios</h4>
+      <ul>
+        <li><a href="garantia_producto.html">garantia de Productos</a></li>
+        <li><a href="#">Métodos de Pago</a></li>
+         <!-- MÉTODOS DE PAGO -->
+        <div class="payment-methods-footer">
+          <img src="material/ico/yape.png" alt="Yape">
+          <img src="material/ico/plin.jpg" alt="Plin">
+          <img src="material/ico/bcp.jpg" alt="BCP">
+          <img src="material/ico/bbva.png" alt="BBVA">
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Melodox. Todos los derechos reservados. Perú 🇵🇪</p>
+  </div>
+</footer>
+
+  <div class="sound-toggle" id="soundToggle">🔇</div>
+  <script src="script.js"></script>
+</body>
+</html>

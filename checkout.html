@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melodox - Finalizar Compra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #2e8b57;
+      --green-light: #4caf50;
+      --gray-light: #f8f9fa;
+      --gray: #e0e0e0;
+      --red: #e74c3c;
+      --dark: #222;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--gray-light); color: #333; min-height: 100vh; }
+
+    /* HEADER BONITO Y PROFESIONAL */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 18px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--dark);
+    }
+    .logo img {
+      height: 48px;
+      border-radius: 8px;
+    }
+    .logo span {
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+    .header-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #555;
+      letter-spacing: -0.5px;
+    }
+    .back-link {
+      color: #777;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .back-link:hover {
+      background: #f0f0f0;
+      color: var(--green);
+    }
+    .back-link::before {
+      content: "←";
+      font-weight: bold;
+    }
+
+    /* Ajuste del contenedor principal para que no quede debajo del header */
+    .checkout-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 120px auto 60px;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    /* Resto de estilos (igual que antes) */
+    .checkout-finished { display: none !important; }
+
+    .stepper { display: flex; background: white; padding: 35px 50px 0; position: relative; }
+    .stepper::before { content: ''; position: absolute; top: 56px; left: 70px; right: 70px; height: 3px; background: #ddd; z-index: 1; border-radius: 2px; }
+    .step { flex: 1; text-align: center; z-index: 2; cursor: pointer; transition: 0.3s; }
+    .step-circle { width: 46px; height: 46px; border-radius: 50%; background: #ccc; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700; font-size: 18px; transition: 0.4s; }
+    .step.active .step-circle, .step.completed .step-circle { background: var(--green); transform: scale(1.1); }
+    .step.active .step-label { color: var(--green); font-weight: 600; }
+    .step-label { font-size: 15px; color: #888; transition: 0.3s; }
+
+    .content { padding: 50px 70px; position: relative; }
+    h1 { font-size: 30px; color: var(--green); margin-bottom: 30px; font-weight: 700; }
+    h2 { font-size: 22px; margin: 25px 0 15px; color: var(--green); font-weight: 600; }
+
+    .btn {
+      background: var(--green);
+      color: white;
+      padding: 15px 36px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+    }
+    .btn:hover { background: #276944; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46, 139, 87, 0.4); }
+
+    /* Error alert */
+    .error-alert {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: #ffebee;
+      color: var(--red);
+      padding: 14px 22px;
+      border-radius: 10px;
+      border-left: 5px solid var(--red);
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(231, 76, 60, 0.25);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s ease;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+    }
+    .error-alert.show { opacity: 1; transform: translateY(0); }
+    .error-alert::before { content: "Warning"; font-size: 22px; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 20px; }
+    @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+    input {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+    input:focus { border-color: var(--green); outline: none; box-shadow: 0 0 0 4px rgba(46, 139, 87, 0.15); }
+    input.error { border-color: var(--red) !important; }
+
+    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin: 30px 0; }
+    .option {
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 22px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    .option:hover { border-color: var(--green-light); }
+    .option.selected {
+      border-color: var(--green);
+      background: #f0f8f0;
+      box-shadow: 0 6px 20px rgba(46, 139, 87, 0.15);
+    }
+
+   
+
+/* Voucher final */
+        #voucher-screen { display: none; padding: 60px 20px; min-height: 100vh; background: var(--gray-light); text-align: center; }
+        #voucher-screen.active { display: block; }
+        .voucher { max-width: 600px; margin: 0 auto; background: white; border: 3px dashed var(--green); border-radius: 16px; padding: 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
+        .voucher-id { font-size: 24px; margin: 20px 0; color: var(--green); font-weight: 600; }
+        .voucher-total { font-size: 28px; font-weight: 600; color: var(--green); text-align: right; margin: 20px 0; }
+
+      
+
+
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 999; }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: white;
+      padding: 50px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 440px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: modalPop 0.4s ease;
+    }
+    @keyframes modalPop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER BONITO -->
+  <header>
+    <div class="logo">
+      <img src="material/logo.png" alt="Melodox">
+      <span>MELODOX</span>
+    </div>
+    <div class="header-title">Finalizar Compra</div>
+    <a href="index.html" class="back-link">Volver al carrito</a>
+  </header>
+
+  <!-- CHECKOUT -->
+  <div id="checkout" class="checkout-container">
+    <div class="stepper">
+      <div class="step active"><div class="step-circle">1</div><div class="step-label">Resumen</div></div>
+      <div class="step"><div class="step-circle">2</div><div class="step-label">Identificación</div></div>
+      <div class="step"><div class="step-circle">3</div><div class="step-label">Envío</div></div>
+      <div class="step"><div class="step-circle">4</div><div class="step-label">Pago</div></div>
+    </div>
+
+    <div id="errorAlert" class="error-alert">
+      Falta completar algunos campos obligatorios
+    </div>
+
+    <div class="content">
+      <!-- PASO 1 -->
+      <section id="step1">
+        <h1>Resumen de tu compra</h1>
+        <div class="product-item" style="display:flex; align-items:center; padding:25px 0; border-bottom:2px dashed #eee;">
+          <img src="https://via.placeholder.com/100" alt="Guitarra" style="border-radius:12px;">
+          <div style="margin-left:25px; flex:1;">
+            <h4 style="font-size:20px; margin-bottom:8px;">Guitarra Eléctrica Fender Stratocaster</h4>
+            <div style="color:var(--green); font-weight:700; font-size:20px;">s/1.299.000</div>
+          </div>
+        </div>
+        <div style="text-align:right; margin:40px 0;">
+          <div style="font-size:26px; color:var(--green); font-weight:700;">
+            Total a pagar: <strong style="font-size:32px;">s/1.324.000</strong>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <button class="btn" onclick="validateAndGoTo(1, 2)">Continuar →</button>
+        </div>
+      </section>
+
+      <!-- PASO 2 -->
+      <section id="step2" class="hidden">
+        <h1>Datos de identificación</h1>
+        <p style="margin-bottom:30px; color:#666; font-size:16px;">Necesitamos esta información para procesar tu pedido</p>
+        <div class="form-grid">
+          <div><label>DNI *</label><input type="text" id="dni" required placeholder="12345678"></div>
+          <div><label>Nombre *</label><input type="text" id="nombre" required placeholder="Juan"></div>
+          <div><label>Apellido *</label><input type="text" id="apellido" required placeholder="Pérez"></div>
+          <div style="grid-column:1/-1;"><label>Correo electrónico *</label><input type="email" id="email" required placeholder="juan@example.com"></div>
+        </div>
+        <div style="text-align:right; margin-top:50px;">
+          <button class="btn" onclick="validateAndGoTo(2, 3)">Siguiente paso →</button>
+        </div>
+      </section>
+
+      <!-- PASO 3 -->
+      <section id="step3" class="hidden">
+        <h1>Dirección de envío</h1>
+        <div class="form-grid">
+          <div style="grid-column:1/-1;"><label>Nombre completo del destinatario *</label><input type="text" id="nombre_envio" required></div>
+          <div style="grid-column:1/-1;"><label>Dirección completa *</label><input type="text" id="direccion" required placeholder="Av. Ejemplo 123, Dpto 456"></div>
+          <div><label>Ciudad *</label><input type="text" id="ciudad" required></div>
+          <div><label>Código postal *</label><input type="text" id="codigo" required></div>
+          <div style="grid-column:1/-1;"><label>Teléfono de contacto *</label><input type="tel" id="telefono" required placeholder="987654321"></div>
+        </div>
+        <h2 style="margin-top:50px;">Método de envío</h2>
+        <div class="options">
+          <div class="option selected" onclick="selectOption(this)">Envío Express • s/25.000 <small style="display:block; margin-top:5px; color:#666;">1-2 días hábiles</small></div>
+          <div class="option" onclick="selectOption(this)">Envío Estándar • s/15.000 <small style="display:block; margin-top:5px; color:#666;">3-5 días hábiles</small></div>
+        </div>
+        <div style="text-align:right; margin-top:50px;">
+          <button class="btn" onclick="validateAndGoTo(3, 4)">Ir al pago →</button>
+        </div>
+      </section>
+
+      <!-- PASO 4 -->
+      <section id="step4" class="hidden">
+        <h1>Finalizar pago</h1>
+        <div style="display:flex; gap:50px; flex-wrap:wrap; margin-top:30px;">
+          <div style="flex:1; min-width:320px;">
+            <h2>Resumen del pedido</h2>
+            <div style="background:#f8fff8; padding:25px; border-radius:14px; border:2px solid #e8f5e8;">
+              <div style="display:flex; align-items:center; margin-bottom:20px;">
+                <img src="https://via.placeholder.com/80" style="border-radius:10px;">
+                <div style="margin-left:18px;">
+                  <strong style="font-size:18px;">Guitarra Eléctrica Fender</strong><br>
+                  <span style="color:var(--green); font-weight:600;">1 × s/1.299.000</span>
+                </div>
+              </div>
+              <div style="border-top:2px dashed #ddd; padding-top:20px; text-align:right; font-size:17px;">
+                <div>Subtotal: <strong>s/1.299.000</strong></div>
+                <div>Envío: <strong>s/25.000</strong></div>
+                <div style="margin-top:15px; font-size:24px; color:var(--green);">
+                  Total: <strong style="font-size:28px;">s/1.324.000</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1; min-width:320px;">
+            <h2>Método de pago</h2>
+            <div class="options">
+              <div class="option selected" onclick="selectOption(this)">Tarjeta de crédito/débito</div>
+              <div class="option" onclick="selectOption(this)">Contra entrega (efectivo)</div>
+            </div>
+            <div style="margin-top:25px;">
+              <label>Número de tarjeta *</label>
+              <input type="text" id="tarjeta" placeholder="1234 5678 9012 3456" required>
+              <div class="form-grid">
+                <div><label>Vencimiento *</label><input type="text" id="vencimiento" placeholder="MM/AA" required></div>
+                <div><label>CVV *</label><input type="text" id="cvv" placeholder="123" required></div>
+              </div>
+              <label>Nombre del titular *</label>
+              <input type="text" id="titular" required placeholder="Juan Pérez">
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:right; margin-top:60px;">
+          <button class="btn" style="padding:18px 50px; font-size:19px;">
+            Completar compra → s/1.324.000
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Modal éxito -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <h2 style="color:var(--green); font-size:32px; margin-bottom:15px;">¡Compra exitosa!</h2>
+      <p style="font-size:18px; color:#555; margin-bottom:30px;">Tu pedido ha sido procesado correctamente.</p>
+      <button class="btn" onclick="showOnlyVoucher()" style="padding:16px 40px; font-size:18px;">Ver comprobante</button>
+    </div>
+  </div>
+
+
+  <!-- Voucher final -->
+<div id="voucher-screen">
+    <div class="voucher">
+        <h2>MusicStore</h2>
+        <p style="color:#666; font-size:18px;">Gracias por tu compra</p>
+        <div class="voucher-id">Orden: <strong>#MS-20251127-8492</strong></div>
+        <p><strong>Fecha:</strong> 27 de noviembre de 2025</p>
+
+        <table class="voucher-table" style="width:100%; margin:30px 0; border-collapse:collapse;">
+            <tr><th style="text-align:left; padding:10px 0;">Producto</th><th style="text-align:right;">Precio</th></tr>
+            <tr><td>Guitarra Eléctrica Fender Stratocaster</td><td style="text-align:right;">s/1.299.000</td></tr>
+            <tr><td>Envío Express</td><td style="text-align:right;">s/25.000</td></tr>
+        </table>
+
+        <div class="voucher-total">
+            Total pagado: <strong>s/1.324.000</strong>
+        </div>
+
+        <div style="margin-top:50px;">
+            <button class="btn" onclick="window.print()">Imprimir comprobante</button>
+            <button class="btn btn-secondary" style="margin-left:15px;" onclick="location.href='index.html'">
+                Volver a la tienda
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+  <script>
+    let currentStep = 1;
+
+    function showError() {
+      const alert = document.getElementById('errorAlert');
+      alert.classList.add('show');
+      setTimeout(() => alert.classList.remove('show'), 4500);
+    }
+
+    function validateAndGoTo(current, next) {
+      const stepSection = document.getElementById('step' + current);
+      const inputs = stepSection.querySelectorAll('input[required]');
+      let allFilled = true;
+
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          input.classList.add('error');
+          allFilled = false;
+        } else {
+          input.classList.remove('error');
+        }
+      });
+
+      if (allFilled) {
+        goTo(next);
+      } else {
+        showError();
+      }
+    }
+
+    function goTo(step) {
+      if (step < 1 || step > 4) return;
+
+      document.querySelectorAll('#checkout section').forEach(s => s.classList.add('hidden'));
+      document.getElementById('step' + step).classList.remove('hidden');
+
+      document.querySelectorAll('.step').forEach((el, index) => {
+        const stepNum = index + 1;
+        el.classList.remove('active', 'completed');
+        if (stepNum < step) el.classList.add('completed');
+        if (stepNum === step) el.classList.add('active');
+      });
+
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function processPayment() {
+      validateAndGoTo(4, 4);
+      const allGood = [...document.querySelectorAll('#step4 input[required]')].every(i => i.value.trim());
+      if (allGood) {
+        setTimeout(() => document.getElementById('successModal').classList.add('active'), 600);
+      }
+    }
+
+    function showOnlyVoucher() {
+      document.getElementById('checkout').classList.add('checkout-finished');
+      document.getElementById('successModal').classList.remove('active');
+      document.getElementById('voucher-screen').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function selectOption(el) {
+      el.parentNode.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => input.classList.remove('error'));
+    });
+
+    // Botón final
+    document.querySelector('#step4 .btn').onclick = processPayment;
+  </script>
+</body>
+</html>

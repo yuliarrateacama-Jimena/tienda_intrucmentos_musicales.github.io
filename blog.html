@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melodox - Blog</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <div class="tamano">
+          <img src="material/logo.png" alt="Melodox Logo" style="height: 55px;">
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="instrumentos.html">Instrumentos</a>
+        <a href="ofertas.html">Ofertas</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="blog.html" class="active">Blog</a>
+        <button class="btn" id="authBtn">Login</button>
+        <div class="cart-icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></div>
+      </div>
+    </nav>
+  </header>
+
+   <!-- MODAL DE LOGIN -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">×</span>
+      <div class="tabs">
+        <div class="tab active" data-tab="login">Login</div>
+        <div class="tab" data-tab="register">Registro</div>
+      </div>
+      <div id="loginForm" style="display: block;">
+        <input type="text" id="username" placeholder="Email o usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button class="modal-btn" id="loginSubmit">Ingresar</button>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <input type="text" id="regUsername" placeholder="Nombre completo" required />
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Contraseña" required />
+        <button class="modal-btn" id="registerSubmit">Registrarse</button>
+      </div>
+      <p id="authError" ></p>
+      <p id="authSuccess" ></p>
+    </div>
+  </div>
+  <!-- === CARRITO LATERAL === 
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Mi Carrito</h3>
+      <span id="closeCart">×</span>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total">Total: S/ <span id="cartTotal">0</span></div>
+    <button class="checkout-btn">Pagar Ahora</button>
+  </div>-->
+  <!-- CARRITO LATERAL -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Mi Carrito</h3>
+    <span id="closeCart">×</span>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <!-- Ejemplo dinámico -->
+    <div class="cart-item">
+      <img src="material/blog/guitarra_b.jpg" alt="Piano P-45">
+      <div class="item-info">
+        <p>Piano P-45</p>
+        <p class="price">S/ 2100</p>
+      </div>
+      <button class="remove-item">×</button>
+    </div>
+    <!--fin de ejemplo de carrito-->
+  </div>
+  <div class="cart-total">Total: S/ <span id="cartTotal">2100</span></div>
+  <button class="checkout-btn" onclick="goToCheckout()">Pagar Ahora</button>
+</div>
+
+  <!-- BANNER -->
+  <div class="blog-banner">
+    <h1>Blog Melodox</h1>
+    <p>Consejos, reseñas y noticias del mundo musical</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="container blog-container">
+    <div class="blog-content">
+
+      <!-- POST 1 -->
+      <article class="blog-post">
+        <img src="./material/blog/guitarra_b.jpg">
+        <div class="post-info">
+          <span class="category">Guitarras</span>
+          <span class="date">16 Nov 2025</span>
+          <h3>¿Cómo elegir tu primera guitarra eléctrica?</h3>
+          <p>Guía completa para principiantes: marcas, precios y consejos para no equivocarte en tu primera compra.</p>
+          <a href="#" class="read-more">Leer más →</a>
+        </div>
+      </article>
+
+      <!-- POST 2 -->
+      <article class="blog-post">
+        <img src="./material/blog/teclado_b.webp">
+        <div class="post-info">
+          <span class="category">Teclados</span>
+          <span class="date">14 Nov 2025</span>
+          <h3>Yamaha PSR-E383: ¿Vale la pena en 2025?</h3>
+          <p>Reseña completa del teclado más vendido en Perú. Sonidos, funciones y por qué es ideal para estudiantes.</p>
+          <a href="#" class="read-more">Leer más →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="blog-sidebar">
+      <div class="sidebar-box">
+        <h3 style="color: black;">Categorías</h3>
+        <ul>
+          <li><a href="#">Guitarras <span>(12)</span></a></li>
+          <li><a href="#">Teclados <span>(8)</span></a></li>
+          <li><a href="#">Baterías <span>(5)</span></a></li>
+          <li><a href="#">Accesorios <span>(15)</span></a></li>
+          <li><a href="#">Consejos <span>(20)</span></a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+  <div class="footer-container">
+    <!-- Nuestras Tiendas -->
+    <div class="footer-column">
+      <h4> Nuestras Tiendas</h4>
+      <p>Calle Alcanfores 199 Tiendas 101, 102 y 104</p>
+      <p>Lun a Sab 10am - 7:30pm / Dom 11am - 6pm</p>
+      <p><strong>ventas@marin.pe</strong></p>
+      <p><strong>+51 940 027 128</strong></p>
+    </div>
+
+    <!-- Condiciones y Garantía -->
+    <div class="footer-column">
+      <h4> Condiciones y Garantía</h4>
+      <ul>
+        <li><a href="cokis.html">Términos de cokis</a></li>
+        <li><a href="politica_de_privacidad.html">Política de Privacidad</a></li>
+        <li><a href="politica.html">politica de devoluciones</a></li>
+        <li><a href="libro_reclamos.html">Libro de Reclamaciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Nuestra Historia -->
+    <div class="footer-column">
+      <h4> Nuestra Historia</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="galeria_video.html">Galería de Videos</a></li>
+      </ul>
+    </div>
+
+    <!-- Servicios -->
+    <div class="footer-column">
+      <h4> Servicios</h4>
+      <ul>
+        <li><a href="garantia_producto.html">garantia de Productos</a></li>
+        <li><a href="#">Métodos de Pago</a></li>
+         <!-- MÉTODOS DE PAGO -->
+        <div class="payment-methods-footer">
+          <img src="material/ico/yape.png" alt="Yape">
+          <img src="material/ico/plin.jpg" alt="Plin">
+          <img src="material/ico/bcp.jpg" alt="BCP">
+          <img src="material/ico/bbva.png" alt="BBVA">
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Melodox. Todos los derechos reservados. Perú 🇵🇪</p>
+  </div>
+</footer>
+
+  <div class="sound-toggle" id="soundToggle">🔇</div>
+  <script src="script.js"></script>
+</body>
+</html>

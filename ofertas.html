@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melodox - Ofertas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <div class="tamano">
+          <img src="material/logo.png" alt="Melodox Logo" style="height: 55px;">
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="instrumentos.html">Instrumentos</a>
+        <a href="ofertas.html" class="active">Ofertas</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="blog.html">Blog</a>
+        <button class="btn" id="authBtn">Login</button>
+        <div class="cart-icon" id="cartIcon">🛒 <span class="cart-count" id="cartCount">0</span></div>
+      </div>
+    </nav>
+  </header>
+
+   <!-- MODAL DE LOGIN -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">×</span>
+      <div class="tabs">
+        <div class="tab active" data-tab="login">Login</div>
+        <div class="tab" data-tab="register">Registro</div>
+      </div>
+      <div id="loginForm" style="display: block;">
+        <input type="text" id="username" placeholder="Email o usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button class="modal-btn" id="loginSubmit">Ingresar</button>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <input type="text" id="regUsername" placeholder="Nombre completo" required />
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Contraseña" required />
+        <button class="modal-btn" id="registerSubmit">Registrarse</button>
+      </div>
+      <p id="authError" ></p>
+      <p id="authSuccess" ></p>
+    </div>
+  </div>
+  <!-- CARRITO LATERAL -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Mi Carrito</h3>
+      <span id="closeCart">×</span>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total">Total: S/ <span id="cartTotal">0</span></div>
+    <button class="checkout-btn">Pagar Ahora</button>
+  </div>
+
+  <!-- MAIN: OFERTAS -->
+  <main style="padding-top: 100px; min-height: calc(100vh - 300px);">
+    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 5%;">
+      
+      <!-- TÍTULO -->
+      <h1 style="text-align: center; font-family: 'Orbitron', sans-serif; color: var(--green-fluo); font-size: 3rem; margin: 2rem 0; text-shadow: 0 0 20px rgba(57,255,20,0.4);">
+        🔥 OFERTAS ESPECIALES 🔥
+      </h1>
+
+      <!-- GRID DE OFERTAS -->
+      <div class="ofertas-grid">
+        
+        <!-- OFERTA 1 -->
+        <div class="oferta-card">
+          <img src="./material/guitarra-electrica.jpg" alt="Pack Guitarra">
+          <div class="oferta-info">
+            <h3>PACK de Guitarra Eléctrica & Amplificador & Afinador & Funda & Capo</h3>
+            <p><strong>GENERICO</strong> | Por Carrizales Music</p>
+            <div class="precio">
+              <span class="original">S/ 765</span>
+              <span class="descuento">-9%</span>
+              <span class="actual">S/ 698</span>
+            </div>
+           <button class="add-oferta" onclick="addToCart('Pack Guitarra Eléctrica', 698, '<img src=\'./material/guitarra-electrica.jpg\' style=\'width:30px; height:30px;\'>')">
+              Agregar al Carro
+            </button>
+          </div>
+        </div>
+
+        <!-- OFERTA 2 -->
+        <div class="oferta-card">
+          <img src="./material/piano.jpg" alt="Teclado Yamaha">
+          <div class="oferta-info">
+            <h3>TECLADO PSR-E383 PACK SENSIBLE - NUEVO MODELO</h3>
+            <p><strong>YAMAHA</strong> | Por Suministros Musicales</p>
+            <div class="precio">
+              <span class="original">S/ 1,500</span>
+              <span class="descuento">-16%</span>
+              <span class="actual">S/ 1,259</span>
+            </div>
+            <button class="add-oferta" onclick="addToCart('Pack Guitarra Eléctrica', 698, '<img src=\'./material/piano.jpg\' style=\'width:30px; height:30px;\'>')">
+              Agregar al Carro
+            </button>
+          </div>
+        </div>
+
+        <!-- OFERTA 3 -->
+        <div class="oferta-card">
+          <img src="./material/violin3.jpeg" alt="Piano Yamaha">
+          <div class="oferta-info">
+            <h3>PACK VIOLIN P-45</h3>
+            <p><strong>YAMAHA</strong> | Por J & K Music Import Perú</p>
+            <div class="precio">
+              <span class="original">S/ 2,500</span>
+              <span class="descuento">-16%</span>
+              <span class="actual">S/ 2,100</span>
+            </div>
+           <button class="add-oferta" onclick="addToCart('Pack Guitarra Eléctrica', 698, '<img src=\'./material/violin3.jpeg\' style=\'width:30px; height:30px;\'>')">
+              Agregar al Carro
+            </button>
+          </div>
+        </div>
+
+        <!-- OFERTA 4 -->
+        <div class="oferta-card">
+          <img src="./material/estuche4.jpeg" alt="Guitarra Acústica">
+          <div class="oferta-info">
+            <h3>ESTUCHE DE GUITARRA  SUNBURST</h3>
+            <p><strong>VOZZEX</strong> | Por Suministros Musicales</p>
+            <div class="precio">
+              <span class="original">S/ 290</span>
+              <span class="descuento">-31%</span>
+              <span class="actual">S/ 199</span>
+            </div>
+            <div class="rating">★★★★☆ <span style="color:#666; font-size:0.9rem;">(3)</span></div>
+            <button class="add-oferta" onclick="addToCart('Pack Guitarra Eléctrica', 698, '<img src=\'./material/estuche4.jpeg\' style=\'width:30px; height:30px;\'>')">
+              Agregar al Carro
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+  <div class="footer-container">
+    <!-- Nuestras Tiendas -->
+    <div class="footer-column">
+      <h4> Nuestras Tiendas</h4>
+      <p>Calle Alcanfores 199 Tiendas 101, 102 y 104</p>
+      <p>Lun a Sab 10am - 7:30pm / Dom 11am - 6pm</p>
+      <p><strong>ventas@marin.pe</strong></p>
+      <p><strong>+51 940 027 128</strong></p>
+    </div>
+
+    <!-- Condiciones y Garantía -->
+    <div class="footer-column">
+      <h4> Condiciones y Garantía</h4>
+      <ul>
+        <li><a href="cokis.html">Términos de cokis</a></li>
+        <li><a href="politica_de_privacidad.html">Política de Privacidad</a></li>
+        <li><a href="politica.html">politica de devoluciones</a></li>
+        <li><a href="libro_reclamos.html">Libro de Reclamaciones</a></li>
+      </ul>
+    </div>
+
+    <!-- Nuestra Historia -->
+    <div class="footer-column">
+      <h4> Nuestra Historia</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="galeria_video.html">Galería de Videos</a></li>
+      </ul>
+    </div>
+
+    <!-- Servicios -->
+    <div class="footer-column">
+      <h4> Servicios</h4>
+      <ul>
+        <li><a href="garantia_producto.html">garantia de Productos</a></li>
+        <li><a href="#">Métodos de Pago</a></li>
+         <!-- MÉTODOS DE PAGO -->
+        <div class="payment-methods-footer">
+          <img src="material/ico/yape.png" alt="Yape">
+          <img src="material/ico/plin.jpg" alt="Plin">
+          <img src="material/ico/bcp.jpg" alt="BCP">
+          <img src="material/ico/bbva.png" alt="BBVA">
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Melodox. Todos los derechos reservados. Perú 🇵🇪</p>
+  </div>
+</footer>
+
+  <div class="sound-toggle" id="soundToggle">🔇</div>
+  <script src="script.js"></script>
+</body>
+</html>
